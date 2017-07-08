@@ -1,0 +1,58 @@
+{
+    "dalmia": {
+        "all_items": [
+            {
+                "item_name": "SAMOSA", 
+                "item_price": 15.0
+            }, 
+            {
+                "item_name": "SAMOSA", 
+                "item_price": 15.0
+            }, 
+            {
+                "item_name": "Meals", 
+                "item_price": 70.0
+            }, 
+            {
+                "item_name": "Parota", 
+                "item_price": 65.0
+            }
+        ]
+    }, 
+    "mayura": {
+        "all_items": [
+            {
+                "item_name": "IDLY", 
+                "item_price": 20.0
+            }, 
+            {
+                "item_name": "DOSA", 
+                "item_price": 30.0
+            }, 
+            {
+                "item_name": "MASALA DOSA", 
+                "item_price": 25.0
+            }, 
+            {
+                "item_name": "SAMOSA", 
+                "item_price": 15.0
+            }, 
+            {
+                "item_name": "VADA", 
+                "item_price": 15.0
+            }, 
+            {
+                "item_name": "Meals", 
+                "item_price": 60.0
+            }, 
+            {
+                "item_name": "Parota", 
+                "item_price": 60.0
+            }, 
+            {
+                "item_name": "chapati", 
+                "item_price": 60.0
+            }
+        ]
+    }
+}

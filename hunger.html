@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hunger</title>
+	<style type="text/css">
+		#d_list{
+			background-color: powderblue;
+			margin: auto;
+   			width: 60%;
+    		border: 3px solid #73AD21;
+    		padding: 10px;
+    		overflow: scroll;
+		}
+		#menu{
+			width: 100%;
+			height: 10%;
+			background-color: blue;
+			margin-top: 0%;
+			color: white;
+		}
+		body{
+			display: block;
+			margin: 0%
+		}
+		#div_header{
+				margin :auto;
+				width: 60%;
+				background-color: red;
+				font-size: 50px;
+		}
+		#div_body{
+				margin :auto;
+				width: 60%;
+		}
+
+	</style>
+	<script type="text/javascript">
+			xhttp_request=new XMLHttpRequest();
+			url="http://localhost:8000/hunger/get_items_list";
+			xhttp_request.open('GET',url);
+			xhttp_request.onload=function(){
+				var resposeData=JSON.parse(xhttp_request.responseText);
+				list=Object.keys(resposeData);
+				for(i=0;i<list.length;i++){
+					console.log(list.length);
+					var supplier_name=resposeData[list[i]]["supplier_name"];
+					console.log(supplier_name);
+					var element=document.createElement("div");
+					element.setAttribute("id", "Div"+i);
+
+					element.appendChild(document.createTextNode(supplier_name));
+					element.style.fontSize="30px";
+					element.style.color="red";
+					element.style.backgroundColor="yellow";
+					
+					
+					var data=resposeData[list[i]]["all_items"];
+					document.getElementById("d_list").appendChild(element);
+					var list_items=document.createElement("div");
+					list_items.setAttribute("id","Div_list"+i);
+					for(j=0;j<data.length;j++){
+						var item_id=data[j]["item_id"];
+						var item_price=data[j]["item_price"];
+						var item_name=data[j]["item_name"];
+						
+						
+						var h=document.createElement("H3");
+						var t=document.createTextNode("ITEM: "+item_name+" \t"+"PRICE: "+item_price);
+						h.appendChild(t);
+						list_items.appendChild(h);
+						document.getElementById("d_list").appendChild(list_items);
+					}
+					
+					console.log("finished");
+					
+				}
+				
+			}
+			xhttp_request.send();
+
+
+	</script>
+</head>
+<body>
+
+	<div style="height: 100%;width: 100%;margin:0px">
+		<div id="menu">
+			<h1 style="text-align: center;">Hunger</h1>
+		</div>
+		<div id="d_list">
+		</div>
+	</div>
+
+</body>
+</html>

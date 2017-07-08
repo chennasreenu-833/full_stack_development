@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login Page</title>
+</head>
+<body style="background-color: gray;">
+<div style="align:center;margin-left: 40%;margin-top:15% ">
+	<p id="error" style="color: red;"></p>
+	
+	<strong>User name :</strong><input id="username" type="text" name="username" value="admin" " /><br>
+	<strong>Password  :</strong><input id="password" type="password" name="password " style="margin-top: 2% "/><br>
+		
+			<button id="login" onclick="checkDetails()" style="margin-left: 18%;margin-top:2%">Login</button>
+</div>
+<script type="text/javascript">
+	function checkDetails(){
+		var username=document.getElementById("username").value;
+		var password=document.getElementById("password").value;
+		if(username.length>0&&password.length>0){
+			var params="username="+username+"&password="+password;
+			var xhttp=new XMLHttpRequest();
+			var url="http://localhost:8000/check_supplier_login";
+			xhttp.open("POST",url,true);
+			xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+			xhttp.onreadystatechange=function(){
+			if(this.readyState==4 && this.status==200){
+				if(xhttp.responseText=='TRUE'){
+					var xhttp_for_optionEntry=new XMLHttpRequest();
+					var url_option="https://pollingappdjango.herokuapp.com/option_entry";
+					var params="login=TRUE";
+					
+					window.open("","_self")
+				}
+				else{
+					window.alert("Login Failed");
+				}
+				
+			}
+		};
+		
+		
+  		xhttp.send(params);
+		}
+		else{
+			document.getElementById("error").innerHTML="Please fill in Details";
+		}
+		
+	}
+
+
+</script>
+	
+			
+
+</body>
+</html>
