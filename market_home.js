@@ -1,5 +1,5 @@
 xhttp_request=new XMLHttpRequest();
-url="http://localhost:8000/market/get_suppliers";
+url="http://localhost:8000/market/get_producers";
 xhttp_request.open('GET',url);
 xhttp_request.onload=function(){
 	var responseData=JSON.parse(xhttp_request.responseText);
