@@ -30,19 +30,19 @@ def mysql_for_get_items():
 
 def mysql_for_get_suppliers():
     cursor=connection.cursor()
-    sql="select supplier_id,supplier_name,supplier_address,supplier_phone from supplier "
+    sql="select supplier_id,supplier_name,supplier_address,supplier_phone from supplier where supplier.app_type=0"
     cursor.execute(sql)
     list=cursor.fetchall()
     return list
 def mysql_for_get_supplier_status():
     cursor=connection.cursor()
-    sql="select supplier_status.supplier_id,supplier.supplier_name,supplier_status.supplier_state from supplier_status inner join supplier on supplier.supplier_id=supplier_status.supplier_id;"
+    sql="select supplier_status.supplier_id,supplier.supplier_name,supplier_status.supplier_state from supplier_status inner join supplier on supplier.supplier_id=supplier_status.supplier_id where supplier.app_type=0;"
     cursor.execute(sql)
     list=cursor.fetchall()
     return list
 def mysql_for_get_supplier_items(id):
     cursor=connection.cursor()
-    sql="select item.item_id,item.item_name,supplier_item_log.price,supplier_item_log.time_to_deliver from supplier_item_log inner join item on supplier_item_log.item_id=item.item_id where supplier_item_log.supplier_id='%d';"%(int(id))
+    sql="select item.item_id,item.item_name,supplier_item_log.price,supplier_item_log.time_to_deliver from supplier_item_log inner join item on supplier_item_log.item_id=item.item_id where supplier_item_log.supplier_id='%d' and item.app_type=0;"%(int(id))
     cursor.execute(sql)
     list=cursor.fetchall()
     return list
