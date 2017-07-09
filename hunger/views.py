@@ -30,7 +30,7 @@ def mysql_for_get_items():
 
 def mysql_for_get_suppliers():
     cursor=connection.cursor()
-    sql="select supplier_id,supplier_name,supplier_address,supplier_phone from supplier where supplier.app_type=0"
+    sql="select supplier.supplier_id,supplier.supplier_name,supplier.supplier_address,supplier.supplier_phone from supplier inner join supplier_status on supplier.supplier_id=supplier_status.supplier_id where supplier.app_type=0 and supplier_status.supplier_state=1"
     cursor.execute(sql)
     list=cursor.fetchall()
     return list
@@ -276,7 +276,26 @@ def update_supplier_item_price(request):
         return HttpResponse(json.dumps({"response": "true"}), content_type="application/json")
     except Exception as ex:
         return HttpResponse(json.dumps({"response":"false"}),content_type="application/json")
+def mysql_for_save_state(id,state):
+    cursor=connection.cursor()
+    sql="update supplier_status set supplier_state='%d' where supplier_id='%d'" %(int(state),int(id))
+    cursor.execute(sql)
 
+def save_state(request):
+    id_string=request.POST.get('id_state','')
+    print id_string
+    suppliers=str(id_string).split(';')
+    for each_supplier in suppliers:
+        if not each_supplier:
+            continue
+        a=str(each_supplier).split(':')
+        id=a[0]
+        state=a[1]
+        try:
+            result=mysql_for_save_state(id,state)
+        except Exception as ex:
+            pass
+        return HttpResponse(json.dumps({"response":"true"}),content_type="application/json");
 
 
 # Create your views here.

@@ -13,6 +13,7 @@ urlpatterns=[
     url(r'^check_admin_login$',views.check_admin_login,name='check_admin_login'),
     url(r'^get_css$',views.get_css,name='get_css'),
     url(r'^get_js$',views.get_js,name='get_js'),
+    url(r'^save_state$',views.save_state,name='save_state'),
     url(r'^get_image$',views.get_image,name="get_image"),
     url(r'^get_hunger_admin_page$',views.get_hunger_admin_page,name='get_hunger_admin_page'),
     url(r'^get_items_from_supplier$', views.get_items_from_supplier, name="get_items_from_supplier"),

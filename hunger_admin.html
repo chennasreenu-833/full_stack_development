@@ -2,6 +2,7 @@
 <head>
 	<title>Hungry App</title>
 </head>
+<link rel="stylesheet" type="text/css" href="http://localhost:8000/hunger/get_css?file=hunger_admin">
 <script type="text/javascript">
 	var auth=<<auth>>;
 	var username="<<username>>";
@@ -12,23 +13,13 @@
 		<div style="display: inline-block;height: 30%;width: 100%"></div>
 		<div style="display: inline-block;height: 70%;font-size: 40px;font-weight: 1000px;color: white;width: 100%">Welcome Administrator</div>
 	</div>
-	<div style="width: 80%; background-color: transparent; text-align: center; height: 90%; display: inline-block;overflow: scroll;">
+	<div id="list_box" style="width: 80%; background-color: transparent; text-align: center; height: 90%; display: inline-block;overflow: scroll;">
 		
-		<a style="width: 80%;display: inline-block;background-color: white;height: 70px;margin: 10px;text-align: left;position: relative;padding: 10px;cursor: pointer;color: black" href="#">
-			<div style="width: 70px;display: inline-block;background-color: transparent;height: 100%;background-image: url('item.png');background-size: contain;">
-				
-			</div>
-			<div style="display: inline-block;width: 500px;background-color: transparent;height: 100%;margin-left: 30px;position: relative;">
-					<div style="position: absolute;top: 25%; bottom: 25%; height: 50%;background-color: transparent;width: 100%;font-family: 'Open Sans',sans-serif;font-size: 2vw">Mayura foods and bakery</div>
-			</div>
-			<div style="position: absolute;right: 10px;height:40px; background-color: transparent; width:40px;top: 20px;bottom: 20%;display: inline-block;">
-				<input type="checkbox" name="" style="width: 40px;height: 40px;display: inline-block;zoom: 1;">
-			</div>
-
-		</a>
+		
 	</div>
 	<div style="width: 100px;height: 30px;display: inline-block;vertical-align: top;margin-top: 10px;cursor: pointer;position: relative; text-align: center;">
-		<button style="width: 150px; height: 100%;position: absolute;top:20px;display: inline-block;font-size: 18px;left: 0px;background-color: white;cursor: pointer;">Save Changes</button>
+		<button  id ="save_changes" style="width: 150px; height: 100%;position: absolute;top:20px;display: inline-block;font-size: 18px;left: 0px;background-color: white;cursor: pointer;">Save Changes</button>
 	</div>
+	<script src="http://localhost:8000/hunger/get_js?file=hunger_admin" type="text/javascript"></script>
 </body>
 </html>

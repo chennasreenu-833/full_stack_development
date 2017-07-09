@@ -1,0 +1,54 @@
+.anchor_class{
+	width: 80%;
+	display: inline-block;
+	background-color: white;
+	height: 70px;
+	margin: 10px;
+	text-align: left;
+	position: relative;
+	padding: 10px;
+	cursor: pointer;
+	color: black
+
+}
+.icon_class{
+	width: 70px;
+	display: inline-block;
+	background-color: transparent;
+	height: 100%;
+	background-image: url('http://localhost:8000/hunger/get_image?image=item');
+	background-size: contain;
+}
+.title_top_class{
+	display: inline-block;
+	width: 500px;
+	background-color: transparent;
+	height: 100%;
+	margin-left: 30px;
+	position: relative;
+}
+.title_class{
+	position: absolute;
+	top: 25%; 
+	bottom: 25%; 
+	height: 50%;
+	background-color: transparent;
+	width: 100%;
+	font-family: 'Open Sans',sans-serif;
+	font-size: 2vw;
+}
+.check_box_top{
+	position: absolute;
+	right: 10px;
+	height:40px; 
+	background-color: transparent;
+	width:40px;
+	top: 20px;
+	bottom: 20%;
+	display: inline-block;
+}
+.check_box{
+	width: 30px;
+	height: 30px;
+	display: inline-block;
+}
