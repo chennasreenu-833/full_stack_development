@@ -6,7 +6,7 @@ if(btn){
     if(username.length>0&&password.length>0){
         params="username="+username+"&password="+password;
         xhttp=new XMLHttpRequest();
-        url='http://localhost:8000/hunger/check_supplier_login';
+        url='http://localhost:8000/hunger/check_admin_login';
         xhttp.open('POST',url);
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp.onload=function(){

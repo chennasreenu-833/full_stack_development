@@ -1,0 +1,41 @@
+<html>
+<head>
+	<title>Hungry App</title>
+</head>
+<script type="text/javascript">
+	var auth=<<auth>>;
+	var username="<<username>>";
+	var userid="<<userid>>";
+</script>
+<body style="width: 100%; height: 100%; background-color: #ededed; display: inline-block;text-align: center;margin: 0px">
+	<div style="width: 100%; height: 10%; background-color: #ea5b31; display: inline-block;text-align: center;">
+		<div style="display: inline-block;height: 30%;width: 100%"></div>
+		<div id="header_title" style="display: inline-block;height: 70%;font-size: 40px;font-weight: 1000px;color: white;width: 100%"></div>
+	</div>
+	<div style="width: 90%; background-color: transparent; text-align: center; height: 90%; display: inline-block;overflow: scroll;">
+		<div style="width: 100%;display: inline-block;height: 20px;margin: 10px;margin-bottom:0px;text-align: left;position: relative;padding: 10px;color: black;font-size: 25px;">
+			Add Or Update Existing Items
+		</div>
+		<div style="width: 100%;display: inline-block;background-color: white;height: 40px;margin: 10px;text-align: left;position: relative;padding: 10px;color: black;position: relative;">
+			<select id="all_existing_items" style="display: inline-block; width: 300px; height: 40px;cursor: pointer;">
+				<option>
+					-- SELECT --
+				</option>
+			</select>
+			<input id="price_box" type="text" name="" style="height: 40px; width: 100px; display: inline-block;margin-left: 20px;font-size: 16px;padding: 5px;">
+			<button id="update_button" type="text" name="" style="height: 40px; width: 100px; display: inline-block;margin-left: 20px;font-size: 16px; cursor: pointer;">Update</button>
+		</div>
+		<div style="width: 100%;display: inline-block;height: 20px;margin: 10px;margin-bottom:0px;text-align: left;position: relative;padding: 10px;color: black;font-size: 25px">
+			Add new Items
+		</div>
+		<div style="width: 100%;display: inline-block;background-color: white;height: 50px;margin: 10px;text-align: left;position: relative;padding: 10px;cursor: pointer;color: black">
+			<input  type="text" style="display: inline-block; width: 300px; height: 40px;font-size: 16px;padding: 5px;">
+				
+			<input type="text" name="" style="height: 40px; width: 100px; display: inline-block;margin-left: 20px;font-size: 16px;padding: 5px;">
+			<button type="text" name="" style="height: 40px; width: 100px; display: inline-block;margin-left: 20px;font-size: 16px; cursor: pointer;">Add</button>
+		</div>
+
+	</div>
+</body>
+<script src="http://localhost:8000/hunger/get_js?file=hunger_add_item" type="text/javascript"></script>
+</html>

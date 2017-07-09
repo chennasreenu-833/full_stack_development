@@ -73,6 +73,20 @@ def mysql_for_check_supplier_login(username,password):
     else:
         return "invalid"
 
+def mysql_for_check_admin_login(username,password):
+    cursor=connection.cursor()
+    sql="select admin_password,admin_id from admin where admin_username = '%s';" %(username)
+    cursor.execute(sql)
+    list=cursor.fetchall()
+    if(list):
+        if(list[0][0]==str(password)):
+            admin_id=list[0][1]
+            return admin_id
+        else:
+            return "failed"
+    else:
+        return "invalid"
+
 def home(request):
     foo = open("hunger_home.html", "r+")
     file_date = foo.read()
@@ -95,6 +109,24 @@ def supplier_login(request):
     foo.close()
     return HttpResponse(file_date, content_type="text/html")
 
+def admin_login(request):
+    foo=open("admin_login.html","r+")
+    file_date = foo.read()
+    foo.close()
+    return HttpResponse(file_date, content_type="text/html")
+def get_supplier_add_item_page(request):
+    auth=request.POST.get('auth','')
+    username=str(request.POST.get('username',''))
+    userid=request.POST.get('userid','')
+    foo=open('hunger_add_item.html','r+')
+
+    file_data=foo.read()
+    file_data=file_data.replace('<<auth>>',str(auth).lower())
+    file_data=file_data.replace('<<username>>',str(username))
+    file_data = file_data.replace('<<userid>>', str(userid))
+    foo.close()
+    return HttpResponse(file_data,content_type='text/html')
+
 def get_items_from_supplier(request):
     foo=open("items_from_supplier.html","r+")
     file_data=foo.read()
@@ -105,6 +137,18 @@ def get_items_from_supplier(request):
     file_data=file_data.replace("<<supplier_name>>","'"+str(supplier_name)+"'")
     foo.close()
     return HttpResponse(file_data, content_type="text/html")
+def get_hunger_admin_page(request):
+    auth = request.POST.get('auth', '')
+    username = str(request.POST.get('username', ''))
+    userid = request.POST.get('userid', '')
+    foo = open('hunger_admin.html', 'r+')
+
+    file_data = foo.read()
+    file_data = file_data.replace('<<auth>>', str(auth).lower())
+    file_data = file_data.replace('<<username>>', str(username))
+    file_data = file_data.replace('<<userid>>', str(userid))
+    foo.close()
+    return HttpResponse(file_data, content_type='text/html')
 
 def get_items_list(request):
     records=mysql_for_get_items_list()
@@ -176,6 +220,12 @@ def check_supplier_login(request):
     result=mysql_for_check_supplier_login(username,password)
     return HttpResponse(result)
 
+def check_admin_login(request):
+    username=request.POST.get('username','')
+    password=request.POST.get('password','')
+    result=mysql_for_check_admin_login(username,password)
+    return HttpResponse(result)
+
 def get_image(request):
     image_name=request.GET.get('image','')
     foo = open("images/"+image_name+".png", "rb+")
@@ -194,6 +244,38 @@ def get_supplier_items(request):
         time_to_deliver=each_rec[3]
         list[item_id]={"item_name":item_name,"item_price":item_price,"time_to_deliver":time_to_deliver}
     return HttpResponse(json.dumps(list),content_type="application/json")
+def mysql_for_get_items_for_supplierid(supplier_id):
+    cursor=connection.cursor()
+    sql="select item.item_name,item.item_id,supplier_item_log.price from supplier_item_log inner join item on item.item_id=supplier_item_log.item_id where supplier_item_log.supplier_id='%d' and item.app_type=0;"%(int(supplier_id))
+    cursor.execute(sql)
+    list=cursor.fetchall()
+    return list
+def get_items_for_supplierid(request):
+    supplier_id=int(request.POST.get('id',''))
+    records=mysql_for_get_items_for_supplierid(supplier_id)
+    list={}
+    for each_rec in records:
+        item_name=each_rec[0]
+        item_id=each_rec[1]
+        price=each_rec[2]
+        if item_id not in list:
+            list[item_id]={"item_name":item_name,"price":price}
+    return HttpResponse(json.dumps(list),content_type="application/json")
+def mysql_for_update_supplier_item_price(supplier_id,item_id,price):
+    cursor=connection.cursor()
+    sql="update supplier_item_log set price='%s' where supplier_id='%d' and item_id='%d' ;"%(str(price),int(supplier_id),int(item_id))
+    cursor.execute(sql)
+
+
+def update_supplier_item_price(request):
+    supplier_id=request.POST.get('supplier_id','')
+    item_id=request.POST.get('item_id','')
+    try:
+        price=float(request.POST.get('price',''))
+        mysql_for_update_supplier_item_price(supplier_id,item_id,price)
+        return HttpResponse(json.dumps({"response": "true"}), content_type="application/json")
+    except Exception as ex:
+        return HttpResponse(json.dumps({"response":"false"}),content_type="application/json")
 
 
 

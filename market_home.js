@@ -9,7 +9,7 @@ xhttp_request.onload=function(){
 		var supplier_address=responseData[list[i]]["supplier_address"];
 		var supplier_phone=responseData[list[i]]["supplier_phone"];
 		var anchor=document.createElement("a");
-		anchor.setAttribute('href','http://localhost:8000/market');
+		anchor.setAttribute('href','http://localhost:8000/market/get_items_from_producer?id='+list[i]+'&supplier_name='+supplier_name);
 		anchor.setAttribute('class','anchor_class');
 		var dinner_div=document.createElement("div");
 		dinner_div.setAttribute('class','icon_class');
