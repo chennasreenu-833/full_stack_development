@@ -283,8 +283,7 @@ def mysql_for_save_state(id,state):
 
 def save_state(request):
     id_string=request.POST.get('id_state','')
-    print id_string
-    suppliers=str(id_string).split(';')
+    suppliers=str(id_string).split('_')
     for each_supplier in suppliers:
         if not each_supplier:
             continue
@@ -295,7 +294,7 @@ def save_state(request):
             result=mysql_for_save_state(id,state)
         except Exception as ex:
             pass
-        return HttpResponse(json.dumps({"response":"true"}),content_type="application/json");
+    return HttpResponse(json.dumps({"response":"true"}),content_type="application/json")
 
 
 # Create your views here.

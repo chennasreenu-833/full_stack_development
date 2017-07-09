@@ -1,10 +1,11 @@
+var responseData;
 window.onload=function(){
     
     xhttp=new XMLHttpRequest();
     url='http://localhost:8000/hunger/get_supplier_status';
     var state_list=[];
     xhttp.open('GET',url);
-    var responseData;
+   
     xhttp.onload=function(){
         responseData=JSON.parse(xhttp.responseText);
         list=Object.keys(responseData);
@@ -52,23 +53,26 @@ window.onload=function(){
     xhttp.send();
     function save_clicked(){
         // save responseData
+        console.log("button clicked");
         list = Object.keys(responseData);
+        console.log("list lenght is "+String(list.length));
         s="";
         for(i=0;i<list.length;i++)
         {
             id  = list[i];
             status = responseData[list[i]]["supplier_state"];
-            s=s+String(id)+":"+String(status)+";";
+            s=s+String(id)+":"+String(status)+"_";
         }
+        console.log("the string need to send is "+String(s));
         xhttp_save=new XMLHttpRequest();
         url_save='http://localhost:8000/hunger/save_state';
         xhttp_save.open('POST',url_save);
         params="id_state="+s;
         xhttp_save.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhttp_save.onload=function(){
-            responseData=JSON.parse(xhttp_save.responseText);
-            console.log(responseData);
-            if(responseData["response"]=="true"){
+            response_data=JSON.parse(xhttp_save.responseText);
+            console.log(response_data);
+            if(response_data["response"]=="true"){
                 alert("Details saved successfully");
             }
             else{
