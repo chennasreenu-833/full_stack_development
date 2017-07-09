@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.db import connection
 import json
 import datetime
+
 def mysql_for_get_items_list():
     cursor=connection.cursor()
     sql="select supplier.supplier_id,supplier.supplier_name,item.item_id,item.item_name,supplier_item_log.price,supplier_item_log.time_to_deliver" \
@@ -18,7 +19,10 @@ def mysql_for_get_items_list():
     return list
 def mysql_for_get_supplier_items(id):
     cursor=connection.cursor()
-    sql="select item.item_name,supplier_item_log.price,supplier_item_log.time_to_deliver from supplier_item_log inner join item on supplier_item_log.item_id=item.item_id where item.app_type=0 and supplier_item_log.supplier_id='%d;" %(id)
+    current_time= datetime.datetime.now().hour
+    current_time+=5
+    sql="select item.item_id,item.item_name,supplier_item_log.price,supplier_item_log.time_to_deliver from supplier_item_log inner join item on supplier_item_log.item_id=item.item_id where item.app_type=0 and supplier_item_log.supplier_id='%d' and supplier_item_log.available_from<='%d' and supplier_item_log.available_to>'%d' ;" %(id,current_time,current_time)
+    cursor.execute(sql)
     list=cursor.fetchall()
     return list
 def mysql_for_get_items():
@@ -40,12 +44,12 @@ def mysql_for_get_supplier_status():
     cursor.execute(sql)
     list=cursor.fetchall()
     return list
-def mysql_for_get_supplier_items(id):
-    cursor=connection.cursor()
-    sql="select item.item_id,item.item_name,supplier_item_log.price,supplier_item_log.time_to_deliver from supplier_item_log inner join item on supplier_item_log.item_id=item.item_id where supplier_item_log.supplier_id='%d' and item.app_type=0;"%(int(id))
-    cursor.execute(sql)
-    list=cursor.fetchall()
-    return list
+# def mysql_for_get_supplier_items(id):
+#     cursor=connection.cursor()
+#     sql="select item.item_id,item.item_name,supplier_item_log.price,supplier_item_log.time_to_deliver from supplier_item_log inner join item on supplier_item_log.item_id=item.item_id where supplier_item_log.supplier_id='%d' and item.app_type=0;"%(int(id))
+#     cursor.execute(sql)
+#     list=cursor.fetchall()
+#     return list
 
 def mysql_for_add_supplier_item(supplier_id,item_id,available_from,available_to,price,time_to_deliver):
     cursor=connection.cursor()
@@ -132,7 +136,6 @@ def get_items_from_supplier(request):
     file_data=foo.read()
     id=request.GET.get('id','')
     supplier_name=request.GET.get('supplier_name','')
-    print supplier_name
     file_data=file_data.replace("<<id_value>>",id)
     file_data=file_data.replace("<<supplier_name>>","'"+str(supplier_name)+"'")
     foo.close()

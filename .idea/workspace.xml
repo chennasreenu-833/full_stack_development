@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3cd82ca6-bbff-4cf5-8066-96306e50591c" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/final_ans.json" afterPath="$PROJECT_DIR$/final_ans.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunger/views.py" afterPath="$PROJECT_DIR$/hunger/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hunger_admin.js" afterPath="$PROJECT_DIR$/hunger_admin.js" />
     </list>
     <ignored path="cypress.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -63,8 +63,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/hunger/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="118">
-              <caret line="284" column="45" selection-start-line="284" selection-start-column="45" selection-end-line="284" selection-end-column="45" />
+            <state relative-caret-position="-342">
+              <caret line="23" column="259" selection-start-line="23" selection-start-column="259" selection-end-line="23" selection-end-column="259" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
               </folding>
@@ -354,7 +354,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="0" width="1368" height="743" extended-state="6" />
+    <frame x="-1" y="0" width="1368" height="743" extended-state="7" />
     <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14714494" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -769,8 +769,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/hunger/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="284" column="45" selection-start-line="284" selection-start-column="45" selection-end-line="284" selection-end-column="45" />
+        <state relative-caret-position="-342">
+          <caret line="23" column="259" selection-start-line="23" selection-start-column="259" selection-end-line="23" selection-end-column="259" />
           <folding>
             <element signature="e#24#63#0" expanded="true" />
           </folding>
