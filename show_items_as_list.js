@@ -1,16 +1,15 @@
 xhttp_request=new XMLHttpRequest();
-url="http://localhost:8000/hunger/get_suppliers";
+url="http://localhost:8000/hunger/get_items";
 xhttp_request.open('GET',url);
 xhttp_request.onload=function(){
 	var responseData=JSON.parse(xhttp_request.responseText);
 	list=Object.keys(responseData);
-	console.log(list);
-	for(i=0;i<list.length;i++){
-		var supplier_name=responseData[list[i]]["supplier_name"];
-		var supplier_address=responseData[list[i]]["supplier_address"];
-		var supplier_phone=responseData[list[i]]["supplier_phone"];
+	items_list=responseData[list[0]];
+	for(i=0;i<items_list.length;i++){
+		item_name=items_list[i]["item_name"];
+		item_id=items_list[i]["item_id"];
 		var anchor=document.createElement("a");
-		anchor.setAttribute('href','http://localhost:8000/hunger/get_items_from_supplier?id='+list[i]+'&supplier_name='+supplier_name);
+		anchor.setAttribute('href','http://localhost:8000/hunger/get_supplier_for_items_page?id='+item_id);
 		anchor.setAttribute('class','anchor_class');
 		var dinner_div=document.createElement("div");
 		dinner_div.setAttribute('class','dinner_class');
@@ -18,7 +17,7 @@ xhttp_request.onload=function(){
 		title_top_div.setAttribute('class','supplier_top');
 		var title_div=document.createElement("div");
 		title_div.setAttribute('class','supplier_title');
-		title_div.appendChild(document.createTextNode(supplier_name));
+		title_div.appendChild(document.createTextNode(item_name));
 		var arrow_div=document.createElement("div");
 		arrow_div.setAttribute('class','arrow');
 		title_top_div.appendChild(title_div);

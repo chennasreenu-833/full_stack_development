@@ -80,7 +80,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cypress_Db',
         'USER':'root',
-        'PASSWORD':'Chinnu@833',
+        'PASSWORD':'ur_password',
         'HOST':'localhost',
         'PORT':'3306',
     }

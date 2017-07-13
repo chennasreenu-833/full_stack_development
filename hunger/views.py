@@ -6,6 +6,15 @@ from django.db import connection
 import json
 import datetime
 
+def mysql_for_get_supplier_for_items_list(item_id):
+    cursor=connection.cursor()
+    current_time = datetime.datetime.now().hour
+    current_time += 5
+    sql="SELECT supplier.supplier_id,supplier.supplier_name,item.item_name,supplier_item_log.price,supplier_item_log.time_to_deliver from supplier_item_log inner join supplier on supplier_item_log.supplier_id=supplier.supplier_id inner join item on supplier_item_log.item_id=item.item_id where item.app_type=0 and item.item_id='%d' and supplier_item_log.available_from<='%d' and supplier_item_log.available_to>'%d';"%(int(item_id),current_time,current_time)
+    cursor.execute(sql)
+    list=cursor.fetchall()
+    return list
+
 def mysql_for_get_items_list():
     cursor=connection.cursor()
     sql="select supplier.supplier_id,supplier.supplier_name,item.item_id,item.item_name,supplier_item_log.price,supplier_item_log.time_to_deliver" \
@@ -96,6 +105,43 @@ def home(request):
     file_date = foo.read()
     foo.close()
     return HttpResponse(file_date, content_type="text/html")
+def show_items_as_list(request):
+    foo=open("show_items_as_list.html","r+")
+    file_data=foo.read()
+    foo.close()
+    return HttpResponse(file_data,content_type="text/html")
+
+def get_supplier_for_items_page(request):
+    item_id=request.GET.get('id','')
+    foo=open("get_supplier_for_items_page.html");
+    file_data=foo.read()
+    file_data = file_data.replace("<<id_value>>", item_id)
+    foo.close()
+    return HttpResponse(file_data,content_type="text/html")
+
+
+def get_supplier_for_items_list(request):
+    item_id=request.GET.get('id','')
+    records=mysql_for_get_supplier_for_items_list(item_id)
+    list={}
+    list[item_id]=[];
+    for each_rec in records:
+        supplier_id=each_rec[0];
+        supplier_name=each_rec[1];
+        item_name=each_rec[2];
+        price=each_rec[3];
+        time_to_deliver=each_rec[4];
+        list[item_id]+=[{"supplier_id":supplier_id,"supplier_name":supplier_name,"item_name":item_name,"price":price,"time_to_deliver":time_to_deliver}]
+    return HttpResponse(json.dumps(list),content_type="application/json")
+
+
+
+def show_items(request):
+    foo = open("show_items.html", "r+")
+    file_date = foo.read()
+    foo.close()
+    return HttpResponse(file_date, content_type="text/html")
+
 def get_css(request):
     file_name=request.GET.get('file','')
     foo=open(file_name+".css","r+")
